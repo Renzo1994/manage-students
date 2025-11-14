@@ -22,7 +22,7 @@ import reactor.core.publisher.Mono;
 import static org.mockito.ArgumentMatchers.any;
 
 @WebFluxTest(controllers = AlumnoController.class)
-@Import(GlobalExceptionHandler.class)  // Importa tu manejador global de errores
+@Import(GlobalExceptionHandler.class)  
 class AlumnoControllerTest {
 
     @Autowired

@@ -10,19 +10,15 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor  // sirve para generar constructor sin parametros
-@AllArgsConstructor  // sirve para generar constructor con parametros
+@NoArgsConstructor   
+@AllArgsConstructor   
 
 @Table("alumno")
 public class Alumno {
-
- 
     @Id
     private String id;
     private String nombre;
     private String apellido;
     private String estado; // "ACTIVO" o "INACTIVO"
-    private Integer edad;
- 
- 
+    private Integer edad; 
 }

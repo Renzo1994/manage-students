@@ -40,10 +40,14 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'io.projectreactor:reactor-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-	implementation 'org.springframework.boot:spring-boot-starter-logging'  
+	implementation 'org.springframework.boot:spring-boot-starter-logging'
+	implementation 'org.springdoc:springdoc-openapi-starter-webflux-ui:2.6.0'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
 }
-
+bootRun {
+    sourceResources sourceSets.main
+}
 tasks.named('test') {
 	useJUnitPlatform()
 }
