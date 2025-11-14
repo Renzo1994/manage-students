@@ -1,63 +1,43 @@
 package com.gestion.alumnos.web.dto;
+import org.springframework.data.annotation.Id;
+
+import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+
+@Getter
+@Setter
+@NoArgsConstructor  // sirve para generar constructor sin parametros
+@AllArgsConstructor  // sirve para generar constructor con parametros
 public class AlumnoRequest {
 
-    @NotBlank
+ @Id
+    @NotBlank(message = "El ID no puede estar vacío")
+    @Size(max = 50, message = "El ID no puede tener más de 50 caracteres")
+    private String id;
+
+    @NotBlank(message = "El nombre no puede estar vacío")
+    @Size(max = 20, message = "El nombre no puede tener más de 20 caracteres")
     private String nombre;
 
-    @NotBlank
+    @NotBlank(message = "El apellido no puede estar vacío")
+    @Size(max = 20, message = "El apellido no puede tener más de 20 caracteres")
     private String apellido;
 
-    @NotBlank
+    @NotBlank(message = "El estado no puede estar vacío")
+    @Size(max = 10, message = "El estado no puede tener más de 10 caracteres")
     private String estado; // "ACTIVO" o "INACTIVO"
 
-    @NotNull
-    @Min(0)
+    @NotNull(message = "La edad no puede ser nula")
+    @Min(value = 1, message = "La edad debe ser mayor   1")
+    @Max(value = 100, message =    "La edad no debe ser mayor a 100")
     private Integer edad;
-
-    public AlumnoRequest() {}
-
-    public AlumnoRequest(String nombre, String apellido, String estado, Integer edad) {
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.estado = estado;
-        this.edad = edad;
-    }
-
-    // Getters y setters
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getApellido() {
-        return apellido;
-    }
-
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-    public Integer getEdad() {
-        return edad;
-    }
-
-    public void setEdad(Integer edad) {
-        this.edad = edad;
-    }
+ 
 }

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PostMapping;
 import com.gestion.alumnos.domain.Alumno;
+
 import com.gestion.alumnos.service.AlumnoService;
 import com.gestion.alumnos.web.dto.AlumnoRequest;
 import com.gestion.alumnos.web.dto.AlumnoResponse;
@@ -15,23 +16,24 @@ import com.gestion.alumnos.web.dto.AlumnoResponse;
 import jakarta.validation.Valid;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
 @RequestMapping("/v1/alumnos")
 @RestController
- 
+
 public class AlumnoController {
     private final AlumnoService alumnoService;
 
     public AlumnoController(AlumnoService alumnoService) {
         this.alumnoService = alumnoService;
     }
-    @PostMapping("/crear")
-    public Mono<ResponseEntity<Void>> crear(@Valid @RequestBody AlumnoRequest request) {
-        return alumnoService.crearAlumno(request)
-                .thenReturn(ResponseEntity.status(HttpStatus.CREATED).build());
 
+    @PostMapping("/crear")
+    public Mono<ResponseEntity<Object>> crear(@Valid @RequestBody AlumnoRequest request) {
+        return alumnoService.crearAlumno(request)
+                .then(Mono.just(ResponseEntity.ok().<Object>build()));
     }
 
-    @GetMapping 
+    @GetMapping
     public Flux<AlumnoResponse> findAlumnosActives() {
         return alumnoService.obtenerAlumnosActivos()
                 .map(this::mapToResponse);
